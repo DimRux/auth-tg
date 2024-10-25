@@ -24,7 +24,9 @@ interface TelegramLoginButtonType {
 
 declare global {
   interface Window {
+    TelegramLoginWidget: {
       dataOnauth: (user: TelegramUser) => void;
+    };
   }
 }
 
@@ -54,7 +56,9 @@ export const TelegramLoginButton: FC<TelegramLoginButtonType> = ({
     }
 
     if (typeof dataOnauth === "function") {
-      window.dataOnauth = (user: TelegramUser) => dataOnauth(user);
+      window.TelegramLoginWidget = {
+        dataOnauth: (user: TelegramUser) => dataOnauth(user),
+      };
     }
 
     const script = document.createElement("script");
